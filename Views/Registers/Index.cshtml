@@ -1,47 +1,41 @@
 ﻿@model IEnumerable<BadmintonSoftware.Data.Register>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Registers";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Registers</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Player)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Competition)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegisterDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Competition.CompetitionName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RegisterId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RegisterId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RegisterId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p class="text-right">
+        <a asp-action="Create" class="btn btn-primary">Create New Register</a>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Competition</th>
+                    <th>Register Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var register in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => register.Player.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => register.Competition.CompetitionName)</td>
+                        <td>@Html.DisplayFor(modelItem => register.RegisterDate)</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@register.RegisterId" class="btn btn-info">Details</a>
+                            <a asp-action="Edit" asp-route-id="@register.RegisterId" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@register.RegisterId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this register?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
