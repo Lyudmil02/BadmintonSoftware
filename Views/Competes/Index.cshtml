@@ -1,0 +1,92 @@
+﻿@* @model IEnumerable<BadmintonSoftware.Data.Compete>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerOne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerTwo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Competition)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerOne.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerTwo.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Competition.CompetitionName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CompeteId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CompeteId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CompeteId">Delete</a>|
+                <a asp-action="Match" asp-route-id="@item.CompeteId">Match</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@
+
+@model IEnumerable<BadmintonSoftware.Data.Compete>
+@{
+    ViewData["Title"] = "Competes";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Competes</h2>
+
+    <p class="text-right">
+        <a asp-action="Create" class="btn btn-primary">Create New Compete</a>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Player One</th>
+                    <th><VS</th>
+                    <th>Player Two</th>
+                    <th>Competition</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var compete in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => compete.PlayerOne.FullName)</td>
+                        <td>VS</td>
+                        <td>@Html.DisplayFor(modelItem => compete.PlayerTwo.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => compete.Competition.CompetitionName)</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@compete.CompeteId" class="btn btn-info">Details</a>
+                            <a asp-action="Edit" asp-route-id="@compete.CompeteId" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@compete.CompeteId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this compete?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

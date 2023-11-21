@@ -1,0 +1,97 @@
+﻿@* @model IEnumerable<BadmintonSoftware.Data.Competition>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompetitionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxAge)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompetitionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxAge)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CompetitionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CompetitionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CompetitionId">Delete</a> |
+                <a asp-action="Compete" asp-route-id="@item.CompetitionId">Compete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@
+
+
+
+@model IEnumerable<BadmintonSoftware.Data.Competition>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Competitions</h2>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.CompetitionName)</th>
+                    <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.MaxAge)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CompetitionName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MaxAge)</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.CompetitionId" class="btn btn-info">Details</a>
+                            <a asp-action="Edit" asp-route-id="@item.CompetitionId" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.CompetitionId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this club?')">Delete</a>
+                            <a asp-action="Compete" asp-route-id="@item.CompetitionId" class="btn btn-info">Compete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
